@@ -1,29 +1,35 @@
 package main
 
 import (
+	"flag"
 	"fmt"
+	"io/ioutil"
 	"log"
 	"net/http"
 )
 
+var yamlFile string
+
+func init() {
+	flag.StringVar(&yamlFile, "yaml", "", "set the location of yaml file")
+}
+
 func main() {
+	flag.Parse()
 	mux := defaultMux()
 
-	// Build the MapHandler using the mux as the fallback
 	pathsToUrls := map[string]string{
 		"/gh":         "https://github.com",
 		"/yaml-godoc": "https://godoc.org/gopkg.in/yaml.v2",
 	}
 	mapHandler := MapHandler(pathsToUrls, mux)
 
-	// Build the YAMLHandler using the mapHandler as the fallback
-	yaml := `
-- path: /urlshort
-  url: https://github.com/gophercises/urlshort
-- path: /h
-  url: https://habr.com
-`
-	yamlHandler, err := YAMLHandler([]byte(yaml), mapHandler)
+	yaml, err := ioutil.ReadFile(yamlFile)
+	if err != nil {
+		log.Fatalln("ReadFile: ", err)
+	}
+
+	yamlHandler, err := YAMLHandler(yaml, mapHandler)
 	if err != nil {
 		log.Fatalln("YAMLHandler: ", err)
 	}
