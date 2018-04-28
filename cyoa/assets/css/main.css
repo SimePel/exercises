@@ -1,0 +1,38 @@
+.flex-center-container {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.flex-row-between {
+    display: flex;
+    justify-content: space-between;
+}
+
+.box {
+    width: 600px;
+    height: 80%;
+    background-color: #e6f2ff;
+    border: 1px solid gray;
+}
+
+.title {
+    height: 5%;
+    font-weight: bold;
+    text-align: center;
+    margin: 0.5rem;
+    border-bottom: 1px solid gray;
+}
+
+.cnt {
+    height: 90%;
+    margin-left: 0.3rem;
+}
+
+.navigation {
+    border-top: 1px solid gray;
+}
+
+.link {
+    margin: 0.8rem 0.8rem 0.8rem 0.8rem;
+}
