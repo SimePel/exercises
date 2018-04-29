@@ -21,11 +21,9 @@
                 {{end}}
             </div>
             <div class="navigation">
-                <div class="flex-row-between">
-                    {{range .Options}}
-                    <a class="link" href="#">{{.Arc}}</a>
-                    {{end}}
-                </div>
+                {{range .Options}}
+                <a class="link" href={{.Arc}}>{{.Text}}</a>
+                {{end}}
             </div>
         </div>
     </div>

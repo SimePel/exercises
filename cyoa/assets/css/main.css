@@ -4,11 +4,6 @@
     justify-content: center;
 }
 
-.flex-row-between {
-    display: flex;
-    justify-content: space-between;
-}
-
 .box {
     width: 600px;
     height: 80%;
@@ -34,5 +29,6 @@
 }
 
 .link {
+    display: block;
     margin: 0.8rem 0.8rem 0.8rem 0.8rem;
 }
