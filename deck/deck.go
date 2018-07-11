@@ -1,5 +1,10 @@
 package deck
 
+import (
+	"math/rand"
+	"time"
+)
+
 type suit int
 
 const (
@@ -40,7 +45,7 @@ const (
 )
 
 // New returns deck TODO
-func New() []Card {
+func New(opts ...func([]Card)) []Card {
 	cards := make([]Card, 0, cardsForOneDeck)
 	for i := 0; i < allSuits; i++ {
 		for j := 1; j <= cardsForOneSuit; j++ {
@@ -50,5 +55,20 @@ func New() []Card {
 			})
 		}
 	}
+
+	for _, opt := range opts {
+		opt(cards)
+	}
+
 	return cards
+}
+
+// Shuffle the deck
+func Shuffle() func([]Card) {
+	return func(cards []Card) {
+		rand.Seed(time.Now().Unix())
+		rand.Shuffle(len(cards), func(i, j int) {
+			cards[i], cards[j] = cards[j], cards[i]
+		})
+	}
 }

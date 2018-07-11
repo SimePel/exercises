@@ -32,6 +32,12 @@ func TestNew(t *testing.T) {
 	if cards[0] != expected[0] || cards[1] != expected[1] || cards[13] != expected[13] {
 		t.Fatalf("Got:\n%v\nWant:\n%v\n", cards, expected)
 	}
+
+	cards = New(Shuffle())
+	// don't now how to test random shuffle
+	if (cards[0] == Card{}) {
+		t.Fatalf("Got:\n%v\n", cards)
+	}
 }
 
 func TestRankString(t *testing.T) {
