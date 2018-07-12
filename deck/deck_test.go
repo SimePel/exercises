@@ -1,6 +1,9 @@
 package deck
 
-import "testing"
+import (
+	"reflect"
+	"testing"
+)
 
 func TestNew(t *testing.T) {
 	cards := New()
@@ -33,10 +36,10 @@ func TestNew(t *testing.T) {
 		t.Fatalf("Got:\n%v\nWant:\n%v\n", cards, expected)
 	}
 
-	cards = New(Shuffle())
-	// don't now how to test random shuffle
-	if (cards[0] == Card{}) {
-		t.Fatalf("Got:\n%v\n", cards)
+	deck1 := New(Shuffle())
+	deck2 := New(Shuffle())
+	if reflect.DeepEqual(deck1, deck2) {
+		t.Fatalf("Got two the same decks")
 	}
 }
 
