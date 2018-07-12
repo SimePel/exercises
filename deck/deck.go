@@ -39,7 +39,7 @@ type Card struct {
 }
 
 const (
-	cardsForOneDeck = 54
+	cardsForOneDeck = 52
 	cardsForOneSuit = 13
 	allSuits        = 4
 )
@@ -66,7 +66,7 @@ func New(opts ...func([]Card)) []Card {
 // Shuffle the deck
 func Shuffle() func([]Card) {
 	return func(cards []Card) {
-		rand.Seed(time.Now().Unix())
+		rand.Seed(time.Now().UnixNano())
 		rand.Shuffle(len(cards), func(i, j int) {
 			cards[i], cards[j] = cards[j], cards[i]
 		})
