@@ -1,3 +1,3 @@
 # exercises
 
-Here I will do different exercises to improve my programming skill.
+Here I'm doing different exercises to improve my programming skill.
