@@ -41,6 +41,16 @@ func TestNew(t *testing.T) {
 	if reflect.DeepEqual(deck1, deck2) {
 		t.Fatalf("Got two the same decks")
 	}
+
+	cards = New(MultiDeck(1))
+	if len(cards) != 52 {
+		t.Fatalf("Got:\n%v\nlen=%v, cap=%v", cards, len(cards), cap(cards))
+	}
+
+	cards = New(MultiDeck(3))
+	if len(cards) != 156 {
+		t.Fatalf("Got:\n%v\nlen=%v, cap=%v", cards, len(cards), cap(cards))
+	}
 }
 
 func TestRankString(t *testing.T) {
