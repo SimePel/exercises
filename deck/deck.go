@@ -92,3 +92,27 @@ func MultiDeck(q int) Deck {
 		return tmp
 	}
 }
+
+// Remove cards from deck
+func Remove(ranks ...rank) Deck {
+	return func(cards []Card) []Card {
+		tmp := make([]Card, 0, len(cards))
+		var needToAdd bool
+		var newLen int
+		for _, c := range cards {
+			needToAdd = true
+			for _, r := range ranks {
+				if c.Rank == r {
+					needToAdd = false
+				}
+			}
+			if needToAdd {
+				tmp = append(tmp, c)
+				newLen++
+			}
+		}
+		res := make([]Card, newLen)
+		copy(res, tmp)
+		return res
+	}
+}
