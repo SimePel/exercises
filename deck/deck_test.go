@@ -51,6 +51,16 @@ func TestNew(t *testing.T) {
 	if len(cards) != 156 {
 		t.Fatalf("Got:\n%v\nlen=%v, cap=%v", cards, len(cards), cap(cards))
 	}
+
+	cards = New(Remove(ace, two, three, four))
+	if len(cards) != 36 {
+		t.Fatalf("Got:\n%v\nlen=%v, cap=%v", cards, len(cards), cap(cards))
+	}
+
+	cards = New(Remove(king, jack), MultiDeck(2))
+	if len(cards) != 88 {
+		t.Fatalf("Got:\n%v\nlen=%v, cap=%v", cards, len(cards), cap(cards))
+	}
 }
 
 func TestRankString(t *testing.T) {
