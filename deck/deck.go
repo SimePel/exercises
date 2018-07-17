@@ -2,6 +2,7 @@ package deck
 
 import (
 	"math/rand"
+	"sort"
 	"time"
 )
 
@@ -114,5 +115,20 @@ func Remove(ranks ...rank) Deck {
 		res := make([]Card, newLen)
 		copy(res, tmp)
 		return res
+	}
+}
+
+// SortByRank sorts the deck by rank with provided function
+func SortByRank(f func(i, j rank) bool) Deck {
+	return func(cards []Card) []Card {
+		sort.Slice(cards, transform(cards, f))
+		return cards
+	}
+}
+
+// transform the f to standard function for sorting
+func transform(cards []Card, f func(rank, rank) bool) func(int, int) bool {
+	return func(i, j int) bool {
+		return f(cards[i].Rank, cards[j].Rank)
 	}
 }
