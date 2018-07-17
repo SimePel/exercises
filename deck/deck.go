@@ -121,13 +121,28 @@ func Remove(ranks ...rank) Deck {
 // SortByRank sorts the deck by rank with provided function
 func SortByRank(f func(i, j rank) bool) Deck {
 	return func(cards []Card) []Card {
-		sort.Slice(cards, transform(cards, f))
+		sort.Slice(cards, transformRank(cards, f))
 		return cards
 	}
 }
 
-// transform the f to standard function for sorting
-func transform(cards []Card, f func(rank, rank) bool) func(int, int) bool {
+// SortBySuit sorts the deck by suit with provided function
+func SortBySuit(f func(i, j suit) bool) Deck {
+	return func(cards []Card) []Card {
+		sort.Slice(cards, transformSuit(cards, f))
+		return cards
+	}
+}
+
+// transformSuit transforms the f to standard function for sorting
+func transformSuit(cards []Card, f func(suit, suit) bool) func(int, int) bool {
+	return func(i, j int) bool {
+		return f(cards[i].Suit, cards[j].Suit)
+	}
+}
+
+// transformRank transforms the f to standard function for sorting
+func transformRank(cards []Card, f func(rank, rank) bool) func(int, int) bool {
 	return func(i, j int) bool {
 		return f(cards[i].Rank, cards[j].Rank)
 	}
