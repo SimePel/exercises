@@ -66,14 +66,30 @@ func TestNew(t *testing.T) {
 		return i < j
 	}))
 	if cards[0].Rank != ace {
-		t.Fatalf("Got=\n%v\nExpected that first element will be %v", cards, ace.String())
+		t.Fatalf("Got=\n%v\nExpected that first rank will be %v", cards, ace.String())
 	}
 
 	cards = New(SortByRank(func(i, j rank) bool {
 		return i > j
 	}))
 	if cards[0].Rank != king {
-		t.Fatalf("Got=\n%v\nExpected that first element will be %v", cards, king.String())
+		t.Fatalf("Got=\n%v\nExpected that first rank will be %v", cards, king.String())
+	}
+
+	cards = New(SortBySuit(func(i, j suit) bool {
+		return i > j
+	}))
+	if cards[0].Suit != spades {
+		t.Fatalf("Got=\n%v\nExpected that first suit will be %v", cards, spades.String())
+	}
+
+	cards = New(SortByRank(func(i, j rank) bool {
+		return i > j
+	}), SortBySuit(func(i, j suit) bool {
+		return i > j
+	}))
+	if cards[0].Rank != king && cards[0].Suit != spades {
+		t.Fatalf("Got=\n%v\nExpected that first card will be %v %v", cards, king.String(), spades.String())
 	}
 }
 
