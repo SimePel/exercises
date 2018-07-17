@@ -61,6 +61,20 @@ func TestNew(t *testing.T) {
 	if len(cards) != 88 {
 		t.Fatalf("Got:\n%v\nlen=%v, cap=%v", cards, len(cards), cap(cards))
 	}
+
+	cards = New(SortByRank(func(i, j rank) bool {
+		return i < j
+	}))
+	if cards[0].Rank != ace {
+		t.Fatalf("Got=\n%v\nExpected that first element will be %v", cards, ace.String())
+	}
+
+	cards = New(SortByRank(func(i, j rank) bool {
+		return i > j
+	}))
+	if cards[0].Rank != king {
+		t.Fatalf("Got=\n%v\nExpected that first element will be %v", cards, king.String())
+	}
 }
 
 func TestRankString(t *testing.T) {
