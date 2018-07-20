@@ -4,7 +4,7 @@ package deck
 
 import "strconv"
 
-const _rank_name = "acetwothreefourfivesixseveneightninetenjackqueenking"
+const _rank_name = "AceTwoThreeFourFiveSixSevenEightNineTenJackQueenKing"
 
 var _rank_index = [...]uint8{0, 3, 6, 11, 15, 19, 22, 27, 32, 36, 39, 43, 48, 52}
 

@@ -9,28 +9,45 @@ import (
 type suit int
 
 const (
-	clubs suit = iota
-	diamonds
-	hearts
-	spades
+	// Clubs ♣
+	Clubs suit = iota
+	// Diamonds ♦
+	Diamonds
+	// Hearts ♥
+	Hearts
+	// Spades ♠
+	Spades
 )
 
 type rank int
 
 const (
-	ace rank = iota + 1
-	two
-	three
-	four
-	five
-	six
-	seven
-	eight
-	nine
-	ten
-	jack
-	queen
-	king
+	// Ace 🂡
+	Ace rank = iota + 1
+	// Two 🂢
+	Two
+	// Three 🂣
+	Three
+	// Four 🂤
+	Four
+	// Five 🂥
+	Five
+	// Six 🂦
+	Six
+	// Seven 🂧
+	Seven
+	// Eight 🂨
+	Eight
+	// Nine 🂩
+	Nine
+	// Ten 🂪
+	Ten
+	// Jack 🂫
+	Jack
+	// Queen 🂭
+	Queen
+	// King 🂮
+	King
 )
 
 // Card is representing abstract playing card
