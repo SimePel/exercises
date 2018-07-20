@@ -69,27 +69,11 @@ func TestNew(t *testing.T) {
 		t.Fatalf("Got=\n%v\nExpected that first Rank will be %v", cards, Ace.String())
 	}
 
-	cards = New(SortByRank(func(i, j Rank) bool {
+	cards = New(MultiDeck(3), SortByRank(func(i, j Rank) bool {
 		return i > j
 	}))
 	if cards[0].Rank != King {
 		t.Fatalf("Got=\n%v\nExpected that first Rank will be %v", cards, King.String())
-	}
-
-	cards = New(SortBySuit(func(i, j Suit) bool {
-		return i > j
-	}))
-	if cards[0].Suit != Spades {
-		t.Fatalf("Got=\n%v\nExpected that first Suit will be %v", cards, Spades.String())
-	}
-
-	cards = New(SortByRank(func(i, j Rank) bool {
-		return i > j
-	}), SortBySuit(func(i, j Suit) bool {
-		return i > j
-	}))
-	if cards[0].Rank != King && cards[0].Suit != Spades {
-		t.Fatalf("Got=\n%v\nExpected that first card will be %v %v", cards, King.String(), Spades.String())
 	}
 }
 

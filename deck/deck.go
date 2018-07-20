@@ -145,21 +145,6 @@ func SortByRank(f func(i, j Rank) bool) Deck {
 	}
 }
 
-// SortBySuit sorts the deck by Suit with provided function
-func SortBySuit(f func(i, j Suit) bool) Deck {
-	return func(cards []Card) []Card {
-		sort.Slice(cards, transformSuit(cards, f))
-		return cards
-	}
-}
-
-// transformSuit transforms the f to standard function for sorting
-func transformSuit(cards []Card, f func(Suit, Suit) bool) func(int, int) bool {
-	return func(i, j int) bool {
-		return f(cards[i].Suit, cards[j].Suit)
-	}
-}
-
 // transformRank transforms the f to standard function for sorting
 func transformRank(cards []Card, f func(Rank, Rank) bool) func(int, int) bool {
 	return func(i, j int) bool {
