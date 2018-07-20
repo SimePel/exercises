@@ -45,10 +45,10 @@ const (
 	allSuits        = 4
 )
 
-// Deck is TODO
+// Deck is set of cards
 type Deck func([]Card) []Card
 
-// New returns deck TODO
+// New returns deck with applied opts
 func New(opts ...Deck) []Card {
 	cards := make([]Card, 0, cardsForOneDeck)
 	for i := 0; i < allSuits; i++ {
@@ -78,7 +78,7 @@ func Shuffle() Deck {
 	}
 }
 
-// MultiDeck appends q decks to original
+// MultiDeck appends q decks to the original one
 func MultiDeck(q int) Deck {
 	if q <= 1 {
 		return func(cards []Card) []Card { return cards }
@@ -94,7 +94,7 @@ func MultiDeck(q int) Deck {
 	}
 }
 
-// Remove cards from deck
+// Remove specified cards from the deck
 func Remove(ranks ...rank) Deck {
 	return func(cards []Card) []Card {
 		tmp := make([]Card, 0, len(cards))
