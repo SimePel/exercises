@@ -6,11 +6,12 @@ import (
 	"time"
 )
 
-type suit int
+// Suit of the card
+type Suit int
 
 const (
 	// Clubs ♣
-	Clubs suit = iota
+	Clubs Suit = iota
 	// Diamonds ♦
 	Diamonds
 	// Hearts ♥
@@ -19,11 +20,12 @@ const (
 	Spades
 )
 
-type rank int
+// Rank of the card
+type Rank int
 
 const (
 	// Ace 🂡
-	Ace rank = iota + 1
+	Ace Rank = iota + 1
 	// Two 🂢
 	Two
 	// Three 🂣
@@ -52,8 +54,8 @@ const (
 
 // Card is representing abstract playing card
 type Card struct {
-	Rank rank
-	Suit suit
+	Rank Rank
+	Suit Suit
 }
 
 const (
@@ -71,8 +73,8 @@ func New(opts ...Deck) []Card {
 	for i := 0; i < allSuits; i++ {
 		for j := 1; j <= cardsForOneSuit; j++ {
 			cards = append(cards, Card{
-				Rank: rank(j),
-				Suit: suit(i),
+				Rank: Rank(j),
+				Suit: Suit(i),
 			})
 		}
 	}
@@ -112,7 +114,7 @@ func MultiDeck(q int) Deck {
 }
 
 // Remove specified cards from the deck
-func Remove(ranks ...rank) Deck {
+func Remove(ranks ...Rank) Deck {
 	return func(cards []Card) []Card {
 		tmp := make([]Card, 0, len(cards))
 		var needToAdd bool
@@ -135,16 +137,16 @@ func Remove(ranks ...rank) Deck {
 	}
 }
 
-// SortByRank sorts the deck by rank with provided function
-func SortByRank(f func(i, j rank) bool) Deck {
+// SortByRank sorts the deck by Rank with provided function
+func SortByRank(f func(i, j Rank) bool) Deck {
 	return func(cards []Card) []Card {
 		sort.Slice(cards, transformRank(cards, f))
 		return cards
 	}
 }
 
-// SortBySuit sorts the deck by suit with provided function
-func SortBySuit(f func(i, j suit) bool) Deck {
+// SortBySuit sorts the deck by Suit with provided function
+func SortBySuit(f func(i, j Suit) bool) Deck {
 	return func(cards []Card) []Card {
 		sort.Slice(cards, transformSuit(cards, f))
 		return cards
@@ -152,14 +154,14 @@ func SortBySuit(f func(i, j suit) bool) Deck {
 }
 
 // transformSuit transforms the f to standard function for sorting
-func transformSuit(cards []Card, f func(suit, suit) bool) func(int, int) bool {
+func transformSuit(cards []Card, f func(Suit, Suit) bool) func(int, int) bool {
 	return func(i, j int) bool {
 		return f(cards[i].Suit, cards[j].Suit)
 	}
 }
 
 // transformRank transforms the f to standard function for sorting
-func transformRank(cards []Card, f func(rank, rank) bool) func(int, int) bool {
+func transformRank(cards []Card, f func(Rank, Rank) bool) func(int, int) bool {
 	return func(i, j int) bool {
 		return f(cards[i].Rank, cards[j].Rank)
 	}

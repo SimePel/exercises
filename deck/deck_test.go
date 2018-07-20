@@ -62,30 +62,30 @@ func TestNew(t *testing.T) {
 		t.Fatalf("Got:\n%v\nlen=%v, cap=%v", cards, len(cards), cap(cards))
 	}
 
-	cards = New(SortByRank(func(i, j rank) bool {
+	cards = New(SortByRank(func(i, j Rank) bool {
 		return i < j
 	}))
 	if cards[0].Rank != Ace {
-		t.Fatalf("Got=\n%v\nExpected that first rank will be %v", cards, Ace.String())
+		t.Fatalf("Got=\n%v\nExpected that first Rank will be %v", cards, Ace.String())
 	}
 
-	cards = New(SortByRank(func(i, j rank) bool {
+	cards = New(SortByRank(func(i, j Rank) bool {
 		return i > j
 	}))
 	if cards[0].Rank != King {
-		t.Fatalf("Got=\n%v\nExpected that first rank will be %v", cards, King.String())
+		t.Fatalf("Got=\n%v\nExpected that first Rank will be %v", cards, King.String())
 	}
 
-	cards = New(SortBySuit(func(i, j suit) bool {
+	cards = New(SortBySuit(func(i, j Suit) bool {
 		return i > j
 	}))
 	if cards[0].Suit != Spades {
-		t.Fatalf("Got=\n%v\nExpected that first suit will be %v", cards, Spades.String())
+		t.Fatalf("Got=\n%v\nExpected that first Suit will be %v", cards, Spades.String())
 	}
 
-	cards = New(SortByRank(func(i, j rank) bool {
+	cards = New(SortByRank(func(i, j Rank) bool {
 		return i > j
-	}), SortBySuit(func(i, j suit) bool {
+	}), SortBySuit(func(i, j Suit) bool {
 		return i > j
 	}))
 	if cards[0].Rank != King && cards[0].Suit != Spades {
@@ -100,8 +100,8 @@ func TestRankString(t *testing.T) {
 		t.Fatalf("Got: %v, Expected: %v", a, expected)
 	}
 
-	var f rank = -2
-	expected = "rank(-2)"
+	var f Rank = -2
+	expected = "Rank(-2)"
 	if f.String() != expected {
 		t.Fatalf("Got: %v, Expected: %v", f.String(), expected)
 	}
@@ -114,8 +114,8 @@ func TestSuitString(t *testing.T) {
 		t.Fatalf("Got: %v, Expected: %v", s, expected)
 	}
 
-	var f suit = -2
-	expected = "suit(-2)"
+	var f Suit = -2
+	expected = "Suit(-2)"
 	if f.String() != expected {
 		t.Fatalf("Got: %v, Expected: %v", f.String(), expected)
 	}
