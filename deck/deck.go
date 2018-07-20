@@ -86,6 +86,13 @@ func New(opts ...Deck) []Card {
 	return cards
 }
 
+// GetCard returns first card from the deck and newDeck without that card
+func GetCard(cards []Card) ([]Card, Card) {
+	newDeck := make([]Card, 0, cap(cards)-1)
+	newDeck = append(newDeck, cards[1:]...)
+	return newDeck, cards[0]
+}
+
 // Shuffle the deck
 func Shuffle() Deck {
 	return func(cards []Card) []Card {

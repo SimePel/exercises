@@ -77,6 +77,19 @@ func TestNew(t *testing.T) {
 	}
 }
 
+func TestGetCard(t *testing.T) {
+	cards := New(MultiDeck(3), SortByRank(func(i, j Rank) bool {
+		return i > j
+	}))
+
+	newDeck, c := GetCard(cards)
+	expected := King
+	if cap(newDeck) != cap(cards)-1 || c.Rank != expected {
+		t.Fatalf("Got: %v, Expected: %v\nDeck:\n%v\nGot cap: %v, Expected cap: %v",
+			c.Rank, expected, newDeck, cap(newDeck), cap(cards)-1)
+	}
+}
+
 func TestRankString(t *testing.T) {
 	a := Ace.String()
 	expected := "Ace"
